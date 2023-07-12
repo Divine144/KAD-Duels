@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.divinity.duels.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${mod_id}.refmap.json",
+  "client": [
+    "ClientLevelMixin",
+    "MinecraftMixin"
+  ],
+  "minVersion": "0.8.5",
+  "mixins": [
+    "ServerLevelMixin"
+  ]
+}
