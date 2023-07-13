@@ -17,6 +17,8 @@ public class MinecraftMixin {
 
     @Shadow @Final private Timer timer;
 
+    @Shadow private volatile boolean pause;
+
     @Inject(method= "runTick", at=@At("TAIL"))
     public void runTick(boolean pRenderLevel, CallbackInfo ci) {
         var instance = (Minecraft) (Object) this;
@@ -25,6 +27,19 @@ public class MinecraftMixin {
             if (cap != null) {
                 if (cap.isEnabled()) {
                     this.timer.partialTick = this.pausePartialTick;
+                }
+            }
+        }
+    }
+
+    @Inject(method = "tick", at = @At(value = "HEAD"))
+    public void tick(CallbackInfo ci) {
+        var instance = (Minecraft) (Object) this;
+        if (instance.level != null) {
+            var cap = GlobalCapAttacher.getGlobalLevelCapabilityUnwrap(instance.level);
+            if (cap != null) {
+                if (cap.isEnabled()) {
+                   this.pause = false;
                 }
             }
         }

@@ -18,7 +18,7 @@ import org.lwjgl.glfw.GLFW;
 public class ClientForgeEvents {
 
     @SubscribeEvent
-    public static void inputEvent (InputEvent.MouseButton.Pre event) {
+    public static void inputEvent(InputEvent.MouseButton.Pre event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level != null) {
             var cap = GlobalCapAttacher.getGlobalLevelCapabilityUnwrap(minecraft.level);
@@ -27,33 +27,4 @@ public class ClientForgeEvents {
             }
         }
     }
-
-/*    @SubscribeEvent
-    public static void inputEvent (InputEvent.Key event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level != null) {
-            var cap = GlobalCapAttacher.getGlobalLevelCapabilityUnwrap(minecraft.level);
-            if (cap != null && cap.isEnabled()) {
-                if (event.getKey() == GLFW.GLFW_KEY_C) {
-                    NetworkHandler.INSTANCE.sendToServer(new UnfreezePacket());
-                }
-            }
-        }
-    }*/
-
-
-/*    @SubscribeEvent
-    public static void onInputUpdate(MovementInputUpdateEvent event) {
-        if (event.getEntity() instanceof LocalPlayer player) {
-            player.input.leftImpulse = calculateImpulse(player.input.right, player.input.left);
-        }
-    }
-
-    private static float calculateImpulse(boolean pInput, boolean pOtherInput) {
-        if (pInput == pOtherInput) {
-            return 0.0F;
-        } else {
-            return pInput ? 1.0F : -1.0F;
-        }
-    }*/
 }
